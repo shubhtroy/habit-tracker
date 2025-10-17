@@ -105,5 +105,19 @@ def delete_habit(habit_id):
     db.session.commit()
     return jsonify({'success': True})
 
+# --- Add this entire block to your app.py ---
+
+@app.route('/create-db-tables-secret-route')
+def create_tables():
+    """A secret one-time-use route to create database tables."""
+    try:
+        with app.app_context():
+            db.create_all()
+        return "Database tables created successfully!"
+    except Exception as e:
+        return f"An error occurred: {e}"
+
+# --- End of the block ---
+
 if __name__ == '__main__':
     app.run(debug=True)
