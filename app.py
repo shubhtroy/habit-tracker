@@ -107,15 +107,17 @@ def delete_habit(habit_id):
 
 # --- Add this entire block to your app.py ---
 
-@app.route('/create-db-tables-secret-route')
-def create_tables():
-    """A secret one-time-use route to create database tables."""
+# --- Add this entire block to your app.py ---
+
+@app.route('/setup-database-for-the-first-time')
+def setup_database():
+    """A secret one-time-use route to create all database tables."""
     try:
         with app.app_context():
             db.create_all()
-        return "Database tables created successfully!"
+        return "<h1>Success!</h1><p>Your database tables (user, habit) have been created.</p>"
     except Exception as e:
-        return f"An error occurred: {e}"
+        return f"<h1>Error!</h1><p>An error occurred while creating tables: {e}</p>"
 
 # --- End of the block ---
 
